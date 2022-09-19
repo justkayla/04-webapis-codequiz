@@ -24,12 +24,12 @@ body {
     padding: 10px;
     margin: 24px;
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 1.75rem;
     background-color: #247BA0;      /* Change color */
-    color: white;
+    color: white;                   /* Change color */
   }
 
-  h1 {
+  h1, h2 {
     text-align: center;
     font-size: 3rem;
     font-weight: 700;
