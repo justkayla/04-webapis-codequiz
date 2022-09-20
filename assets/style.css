@@ -11,15 +11,7 @@ body {
     width: 60vw;
     background-color: #f0ead6;      /* Change color */
   }
-  
-  .wrapper {
-    padding-top: 20px;
-  }
-  
-  .card-contents {
-    padding: 5px 5px 10px 5px;
-  }
-  
+   
   button {
     padding: 10px;
     margin: 24px;
@@ -29,13 +21,8 @@ body {
     color: white;                   /* Change color */
   }
 
-  h1, h2 {
-    text-align: center;
-    font-size: 3rem;
-    font-weight: 700;
-    padding: 20px;
-  }
-
-  p {
+  #count {
+    margin-right: 20px;
     font-size: 1.25rem;
+    color: black;
   }
