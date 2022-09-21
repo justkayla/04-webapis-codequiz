@@ -6,20 +6,59 @@ var nextQuestionButton = document.querySelector(".next-question");
 
 // Global Variables
 var score = 0;
-var secondsRemaining = 120;
+var isFinished = false;
+var timer;
+var secondsRemaining;
 // var for current index value as we move through the questions? 
 
+
+// init() is called when the page loads
+function init() {
+  // Add code
+}
+
+// startQuiz() is called when the start button is clicked
+function startQuiz() {
+  secondsRemaining = 120
+  // Prevents start button from being clicked when round is in progress
+  startButton.disabled = true;
+  (startTimer)
+}
+
+// finishQuiz() is called when the quiz is finished
+function finishQuiz() {
+  
+}
+
+// startTimer() starts and stops the timer and triggers finishQuiz()
+function startTimer() {
+  // Sets timer
+  timer = setInterval(function() {
+      secondsRemaining-- ;
+      timerElement.textContent = secondsRemaining;
+      if(secondsReminaing >= 0) {
+        // Tests if finish condition is met
+        if (isFinished && secondsRemaining > 0) {
+          // Clears interval and stops timer
+          clearInterval(timer);
+          finishQuiz();   // Need a finishQuiz function
+        }
+      }
+      if(secondsRemaining === 0 || secondsRemaining < 0) {
+          clearInterval(timerInterval);
+          secondsRemaining = 0;
+      }
+      timer.textContent = secondsRemaining;
+  }, 1000);
+}
 
 
 // Function for showing a question
 function showAQuestion(q){
   var section = document.createElement("section");
-  var h2 = document.getElementById("question");
+  var h2 = document.querySelector(".question");
   h2.textContent = q.question;
-    console.log(h2);
-  
-  var ul = document.createElement("ul");
-    console.log(ul);
+    console.log(h2); 
     
   var li = document.querySelectorAll(".answer");
   li.forEach(function(element, index) {
@@ -65,15 +104,15 @@ showAQuestion(question);
 var questions = [
   { // Index 0
     question: "How is Barry so cute?",
-    answer: [ "A1", "A2", "A3", "A4", ],
-    correctAnswer: 1
+    answer: [ "1", "2", "3", "4", ],
+    correctAnswer: "1"
   // How to identify correct answer?
   },
 
   { // Index 1
     question: "Why is Barry so amazing?",
-    answer: [ "A1", "A2", "A3", "A4", ],
-    correctAnswer: 3
+    answer: [ "1", "2", "3", "4", ],
+    correctAnswer: "3"
   // How to identify correct answer?
   },
 
