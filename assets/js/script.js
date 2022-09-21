@@ -1,9 +1,11 @@
+// DOM Selectors
+var startButton = document.querySelector(".start-button");
+var timer = document.querySelector(".countdown-timer");
+var currentScore = document.querySelector(".current-score");
+var nextQuestionButton = document.querySelector(".next-question");
 
-
-
-
-
-var currentScore = 0;
+// Global Variables
+var score = 0;
 var secondsRemaining = 120;
 // var for current index value as we move through the questions? 
 

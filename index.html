@@ -13,35 +13,43 @@
     <div id="quiz-container">
         
         <header>
-            <p>Score: <span>0</span></p>
-            <p>Seconds left: <span>120</span></p>
-        </header>        
-    
-    
-        <section>
-            <h2 id="question">Question 1</h2>
-            <ul>
-                <li class="answer">A1</li>
-                <li class="answer">A2</li>
-                <li class="answer">A3</li>
-                <li class="answer">A4</li>
-            </ul>
-        </section>
+            <div class="title">Kayla's Coding Quiz</div>
+            <button class="start-button">Start quiz</button>
+            <div class="countdown-timer">120</div>            
+        </header>   
+        
+        <main>
+            <section>
+                <h2 class="question">Question 1</h2>
+                <ul>
+                    <li class="answer">A1</li>
+                    <li class="answer">A2</li>
+                    <li class="answer">A3</li>
+                    <li class="answer">A4</li>
+            </section>
+            
+            <section>
+                <h2 id="question">Question 2</h2>
+                <ul>
+                    <li class="answer">A1</li>
+                    <li class="answer">A2</li>
+                    <li class="answer">A3</li>
+                    <li class="answer">A4</li>
+                </ul>
+            </section>
 
-        <section>
-            <h2 id="question">Question 2</h2>
-            <ul>
-                <li class="answer">A1</li>
-                <li class="answer">A2</li>
-                <li class="answer">A3</li>
-                <li class="answer">A4</li>
-            </ul>
-        </section>
+            <section>
+                <div class="results">
+                    <div class="current-score">
+                        <h2>Score<span>0</span></h2>
+                    </div>
+                    <button class="next-question">Next question</button>
+                </div>
+            </section>
+            
+        </main>
 
-        <button id="start">Start</button>
-    
-    </div>
-
+    </div>      
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
