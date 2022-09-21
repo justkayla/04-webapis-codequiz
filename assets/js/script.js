@@ -1,51 +1,88 @@
 // DOM Selectors
 var startButton = document.querySelector(".start-button");
+var resetButton = document.querySelector(".reset-button");
 var timer = document.querySelector(".countdown-timer");
-var currentScore = document.querySelector(".current-score");
-var nextQuestionButton = document.querySelector(".next-question");
+var questions = document.querySelector(".questions");
+var options = document.querySelector(".option");
+var correctAnswer = document.querySelector(".correct");
+var incorrectAnswer = document.querySelector(".incorrect");
+
 
 // Global Variables
-var score = 0;
-var isFinished = false;
+var correctCounter = 0;
+var incorrectCounter = 0;
+var answeredQuestion = false;
 var timer;
-var secondsRemaining;
+var secondsRemaining = 120;
+var currentQuestion = []; // TODO: Push randomly generated question from object array into currectQuestion array for display purposes?
 // var for current index value as we move through the questions? 
 
 
-// init() is called when the page loads
+// Array for all question objects
+var questions = [
+  { // Index 0
+    question: "How is Barry so cute?",
+    option: [ "1", "2", "3", "4" ],
+    correctAnswer: "1"    // TODO: How to identify correct answer?  
+  },
+
+  { // Index 1
+    question: "Why is Barry so amazing?",
+    option: [ "1", "2", "3", "4" ],
+    correctAnswer: "3"      // TODO: How to identify correct answer?    
+  },
+
+]
+
+
+// init() is called when the page loads, retrieves stored scores
 function init() {
-  // Add code
+  getCorrects();
+  getIncorrects();
 }
+
 
 // startQuiz() is called when the start button is clicked
-function startQuiz() {
+function startQuiz() {  
+  answeredQuestion = false;
   secondsRemaining = 120
-  // Prevents start button from being clicked when round is in progress
-  startButton.disabled = true;
-  (startTimer)
+  
+  displayQuestion();    // TODO: Need question to display
+  startTimer();   // TODO: Need timer to start
 }
 
-// finishQuiz() is called when the quiz is finished
-function finishQuiz() {
-  
+
+// answerQuestionCorrect() is called when a question is answered correctly
+function answerQuestionCorrect() {
+  // Add point to correct counter
+  correctCounter++
+  // Disable start button during game
+  startButton.disabled = true;
+  // show next question?
+  setCorrects()
 }
+
+
+// answerQuestionIncorrect() is called when a question is answered incorrectly
+function answerQuestionIncorrect() {
+  // Add point to incorrect counter
+  incorrectCounter++
+  // Disable start button during game
+  startButton.disabled = true;
+  // stay on incorrect question?
+  setIncorrects()
+}
+
 
 // startTimer() starts and stops the timer and triggers finishQuiz()
 function startTimer() {
   // Sets timer
   timer = setInterval(function() {
       secondsRemaining-- ;
-      timerElement.textContent = secondsRemaining;
-      if(secondsReminaing >= 0) {
-        // Tests if finish condition is met
-        if (isFinished && secondsRemaining > 0) {
-          // Clears interval and stops timer
-          clearInterval(timer);
-          finishQuiz();   // Need a finishQuiz function
-        }
-      }
+      // Tests if time has run out
       if(secondsRemaining === 0 || secondsRemaining < 0) {
-          clearInterval(timerInterval);
+          // Clears interval
+          clearInterval(timer);
           secondsRemaining = 0;
       }
       timer.textContent = secondsRemaining;
@@ -53,129 +90,71 @@ function startTimer() {
 }
 
 
-// Function for showing a question
-function showAQuestion(q){
-  var section = document.createElement("section");
-  var h2 = document.querySelector(".question");
-  h2.textContent = q.question;
-    console.log(h2); 
-    
-  var li = document.querySelectorAll(".answer");
-  li.forEach(function(element, index) {
-    element.textContent = q.answer[index];
-  });
-  
-
-
-
-
-
-  
-  
+// Displays question
+function displayQuestion() {
+  // TODO: Randomly picks question from object array
+  randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+  currentQuestion = []  
+  // Loop to push question into currentQuestion array
+  for(var i = 0; i < questions.length; i++) {
+    currentQuestion.push(questions);
+  }
 
 }
-// Call the function
-showAQuestion(question);
-  
-  // Figure out which item to get from the array whenever the function is called
-  var currentQuestionObj = questions.find(questions[0]);
-  // var currQuestionObj = questions[i];
-  var section = document.createElement("section");
-    console.log(section);
-  var h2 = document.createElement("h2");
-    console.log(h2);
-  var ul = document.createElement("ul");
-    console.log(ul);
-  var li = document.createElement("li");
-    console.log(li);
-// When the User clicks "Start":
-  // Timer starts
-  // Display first question
-    // showAQuestion()
-
-// When a question is displayed:
-  // User must select answer
-  // User must click "next"
-  // 
-    
 
 
-// Array for all question objects
-var questions = [
-  { // Index 0
-    question: "How is Barry so cute?",
-    answer: [ "1", "2", "3", "4", ],
-    correctAnswer: "1"
-  // How to identify correct answer?
-  },
+// Updates correct answer count on screen and stores count
+function setCorrects() {
+  correctAnswer.textContent = correctCounter;
+  localStorage.setItem("correctCount", correctCounter);
+}
 
-  { // Index 1
-    question: "Why is Barry so amazing?",
-    answer: [ "1", "2", "3", "4", ],
-    correctAnswer: "3"
-  // How to identify correct answer?
-  },
+// Updates incorrect answer count on screen and stores count
+function setIncorrects() {
+  incorrectAnswer.textContent = incorrectCounter;
+  localStorage.setItem("incorrectCount", incorrectCounter);
+}
 
-]
+// Functions used by init()
+function getCorrects() {
+  // Get stored value from storage, if it exists
+  var storedCorrects = localStorage.getItem("correctCount");
+  // If stored value doesn't exist, set counter to 0
+  if (storedCorrects === null) {
+    correctCounter = 0;
+  } else {
+    // If a value is retrieved from client storage set correctCounter accordingly
+    correctCounter = storedCorrects;
+  }
+  correctAnswer.textContent = correctCounter;
+}
 
-// Loop through the array of question objects
-// for( var i = 0; i < questions.length; i ++){
-//   var currQuestionObj = questions[i]
-//   var section = document.createElement("section");
-//     console.log(section);
-//   var h2 = document.createElement("h2");
-//     console.log(h2);
-//   var ul = document.createElement("ul");
-//     console.log(ul);
-//   var li = document.createElement("li");
-//     console.log(li);
-//   //add everything to the DOM
-// }
+function getIncorrects() {
+  var storedIncorrects = localStorage.getItem("incorrectCount");
+  if (storedIncorrects === null) {
+    incorrectCounter = 0;
+  } else {
+    incorrectCounter = storedIncorrects;
+  }
+  incorrectAnswer.textContent = incorrectCounter;
+}
 
+// Event listeners
+  // Start button
+startButton.addEventListener("click", startQuiz);
+// TODO: Why doesn't quiz start?
 
+// Call init() when page is opened
+init();
 
-// When the page loads, the User is presented with the quiz title, a description, and the start button
-// User clicks on the start button
-// Listen for click events when unique buttons are pressed
-
-
-    // If option1 button is pressed AND the answer === true, move forward   
-    // Else option1 button is pressed AND the answer === false, move forward AND -5 seconds   
-
-
-
-
-// When the start button is clicked, a timer is started and the User is presented with a question (display message)
-// If the User answers the question correctly, they are presented with another question
-// If the User answers the question incorrectly, time is subtracted from the timer
-// When all questions are answered OR the timer === 0, then the game is over
-// When the game is over, the User can save their initials and score
-
-
-
-// Code for quiz timer
-
-
-// Timer that counts down from 120
-
-// Displays the message one word at a time
-
-
-//function that will display current question and global var the current question [0], [1]
-//function display question runs simultaneously with timer
-
-
-/* 
-If User answers question correctly, no time is subtracted
-Else User answers question incorrectly, 5 seconds are subtracted from timer
-Total amount of time alloted for quiz is 3 minutes
-*/
-
-
-// Code for the EventListener
-  // Clicking "start" button
-  // When they choose a question
-
-
-
-// Code for User name and score keeper
+// Reset button
+function resetQuiz() {
+  // Reset counters
+  correctCounter = 0;
+  incorrectCounter = 0;
+  // Renders correct/incorrect counts and sets to storage
+  setCorrects()
+  setIncorrects()
+}
+//Event listener
+resetButton.addEventListener("click", resetQuiz);

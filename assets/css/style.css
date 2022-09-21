@@ -59,6 +59,11 @@ section {
   border-radius: 8px;
 }
 
+.large-font {
+  font-size: 3.5em;
+  text-align:center;
+}
+
 .results {
   width: 30vw;
   height: 400px;
