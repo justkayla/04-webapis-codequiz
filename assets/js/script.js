@@ -1,20 +1,117 @@
 // DOM Selectors
-var startButton = document.querySelector(".start-button");
-var resetButton = document.querySelector(".reset-button");
-var timer = document.querySelector(".countdown-timer");
-var questions = document.querySelector(".questions");
-var options = document.querySelector(".option");
-var correctAnswer = document.querySelector(".correct");
-var incorrectAnswer = document.querySelector(".incorrect");
+var startButton = document.querySelector("#start-button");
+var timer = document.querySelector("#countdown-timer");
+var questions = document.querySelector("#questions");
+var answers = document.querySelector("#answers");
+var currentScore = document.querySelector("#current-score");
 
 // Global variables
 
+var currentScore = 0;         // When User selects correct answer, +1 to currentScore
+var secondsRemaining = 120;   // Time counts down naturally AND when User selects wrong answer, -10 seconds to secondsRemaining
+
+// Array for Question Objects
+var questions = [
+  { 
+    // Index 0
+    question: "How is Barry so cute?",
+    answers: [ "He's amazing", "He's the best", "He's purrfect", "He's outta this world" ],
+    correctAnswer: 2,
+  },
+  
+  {
+    // Index 1
+    question: "Why is Barry so smelly?",
+    answers: [ "He's rolling around outside", "He was born this way", "He never takes a bath", "He's just a stinky boi" ],
+    correctAnswer: 3,
+  },
+
+  {
+    // Index 3
+    question: "Will I ever understand coding?",
+    answers: [ "For sure!", "Absolutely!", "You got this!", "You're doing great!" ],
+    correctAnswer: 0
+  }
+
+]
+
+// Loop to iterate over Question Objects in Array
+// Elements are created for each Question Object as Array iterates
+// Relavent content from each Question Object is applied to corresponding Element
+// Elements are added to the DOM
+// Should this process be wrapped in a function to call on-demand?
+
+for( var i = 0; i < questions.length; i ++){
+  var currentQuestionObj = questions[i]     // Identifying which question is selected through iteration
+  
+  var questionContainer = document.createElement("section");
+  // <section> tag contains question and answer content
+  document.body.appendChild(questionContainer);
+  
+  var question = document.createElement("h2");
+  // Give it the text of the question
+  question.textContent = currentQuestionObj[" "];    // TODO: How to pass text content from question string based on loop?
+  console.log(question);
+  document.body.appendChild(question);    // TODO: Data versus presentation: Need to appendChild inside <section> questionContainer </section>?
+  
+    var answerContainer = document.createElement("ul");
+  // <ul> tag contains <li> answer tags
+  document.body.appendChild(answerContainer);   // TODO: Data vs presentation: Need to appendChild inside <section> questionContainer </section>?
+   
+  var answer0 = document.createElement("li");
+  // Give it the text of the [0] answer
+  answer0.textContent = currentQuestionObj.answers[0];    // TODO: Why doesn't this select the content from answer[0]?
+  console.log(answer0);
+  document.body.appendChild(answer0);    // TODO: Data vs presentation: Need to appendChild inside <ul> answerContainer </ul>?
+
+  var answer1 = document.createElement("li");
+  // Give it the text of the [1] answer
+  document.body.appendChild(answer1);     // TODO: Data vs presentation: Need to appendChild inside <ul> answerContainer </ul>?
+  
+  var answer2 = document.createElement("li");
+  // Give it the text of the [2] answer
+  
+  var answer3 = document.createElement("li");
+  // Give it the text of the [3] answer;
+  document.body.appendChild(answer3);     // TODO: Data vs presentation: Need to appendChild inside <ul> answerContainer </ul>?
+
+  
+  // Create <h2> tag, give it the text of the question
+  // Create <ul> tag
+  // Create <li> tag for each answer, give it the text of the answers
+  // Add all this stuff to the DOM
+}
 
 
-// Event listeners
-startButton.addEventListener("click", function() {
+// TODO: startQuiz function (which included startTimer)
+// TODO: startTimer function (called with startQuiz)
+// TODO: Event listener for start button / startQuiz function
+// TODO: correctAnswer function: adds point to score counter
+// TODO: incorrectAnswer function: subtracts 10 seconds from timer
 
-})
+
+
+
+
+
+/*
+  <section>
+    <h2>Question 1</h2>
+    <ul>
+      <li>Answer 1</li>
+      <li>Answer 2</li>
+      <li>Answer 3</li>
+      <li>Answer 4</li>
+    </ul>
+  </section>
+
+  
+
+ 
+
+
+
+
 
 
 
@@ -116,7 +213,7 @@ startButton.addEventListener("click", function() {
     // answerQuestionIncorrect() is called when a question is answered incorrectly
     function answerQuestionIncorrect() {
       // Add point to incorrect counter
-      incorrectCounter++
+      correctCounter--
       // Disable start button during game
       startButton.disabled = true;
       // stay on incorrect question?
