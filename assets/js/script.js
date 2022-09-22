@@ -1,14 +1,15 @@
 // DOM Selectors
-var startButton = document.querySelector("#start-button");
-var timer = document.querySelector("#countdown-timer");
-var questions = document.querySelector("#questions");
-var answers = document.querySelector("#answers");
-var currentScore = document.querySelector("#current-score");
+var startButton = document.querySelector("#start-button");    // Start button to begin the quiz
+var timer = document.querySelector("#countdown-timer");       // Countdown timer
+var questions = document.querySelector("#questions");         // Tag where questions will be displayed
+var answers = document.querySelector("#answers");             // Tag where answers will be displayed
+var currentScore = document.querySelector("#current-score");  // Counter for correct answers
+
 
 // Global variables
-
 var currentScore = 0;         // When User selects correct answer, +1 to currentScore
 var secondsRemaining = 120;   // Time counts down naturally AND when User selects wrong answer, -10 seconds to secondsRemaining
+var questionIndex = 0;
 
 // Array for Question Objects
 var questions = [
@@ -35,55 +36,79 @@ var questions = [
 
 ]
 
-// Loop to iterate over Question Objects in Array
-// Elements are created for each Question Object as Array iterates
-// Relavent content from each Question Object is applied to corresponding Element
-// Elements are added to the DOM
-// Should this process be wrapped in a function to call on-demand?
-
-for( var i = 0; i < questions.length; i ++){
-  var currentQuestionObj = questions[i]     // Identifying which question is selected through iteration
-  
-  var questionContainer = document.createElement("section");
+// When call display function, clear area 
+function displayQuestion() {    // close function
+  // TODO: Figure out which item to get from the array whenever this function is called
+  var currentQuestionObj = questions[questionIndex];
+ 
+  var section = document.createElement("section");
   // <section> tag contains question and answer content
-  document.body.appendChild(questionContainer);
+  document.body.appendChild(section);
   
   var question = document.createElement("h2");
   // Give it the text of the question
-  question.textContent = currentQuestionObj[" "];    // TODO: How to pass text content from question string based on loop?
-  console.log(question);
-  document.body.appendChild(question);    // TODO: Data versus presentation: Need to appendChild inside <section> questionContainer </section>?
+  question.textContent = currentQuestionObj.question;    // TODO: How to pass text content from question string based on loop?
+  section.appendChild(question);    // TODO: Data versus presentation: Need to appendChild inside <section> questionContainer </section>?
   
-    var answerContainer = document.createElement("ul");
+  var answerList = document.createElement("ul");
   // <ul> tag contains <li> answer tags
-  document.body.appendChild(answerContainer);   // TODO: Data vs presentation: Need to appendChild inside <section> questionContainer </section>?
-   
-  var answer0 = document.createElement("li");
-  // Give it the text of the [0] answer
-  answer0.textContent = currentQuestionObj.answers[0];    // TODO: Why doesn't this select the content from answer[0]?
-  console.log(answer0);
-  document.body.appendChild(answer0);    // TODO: Data vs presentation: Need to appendChild inside <ul> answerContainer </ul>?
+       // TODO: Data vs presentation: Need to appendChild inside <section> questionContainer </section>?  
+  
+  // Loop for corresponding answers to populate w/question
+  for( var i = 0; i < currentQuestionObj.answers.length; i++) {
+    var currAnswerArr = currentQuestionObj.answers[i];
+    
+    currAnswerArr[0] = document.createElement("li", "button");
+    currAnswerArr[0].textContent = currentObject.answers[0];
+    ul.appendChild(currAnswerArr[0]);
 
-  var answer1 = document.createElement("li");
-  // Give it the text of the [1] answer
-  document.body.appendChild(answer1);     // TODO: Data vs presentation: Need to appendChild inside <ul> answerContainer </ul>?
-  
-  var answer2 = document.createElement("li");
-  // Give it the text of the [2] answer
-  
-  var answer3 = document.createElement("li");
-  // Give it the text of the [3] answer;
-  document.body.appendChild(answer3);     // TODO: Data vs presentation: Need to appendChild inside <ul> answerContainer </ul>?
 
+    // create li tag
+    // buttons inside li tags
+    // give li tag value of currAnswerArr
+    // add li tag to the ul
+    // repeat for every answer
+
+    
+  }
+
+  section.appendChild(answerList); 
+
+  // // Loop for answers
+  // var answer0 = document.createElement("li");
+  // // Give it the text of the [0] answer
+  // answer0.textContent = currentQuestionObj.answers[0];    // TODO: Why doesn't this select the content from answer[0]?
+  // console.log(answer0);
+  // ul.appendChild(answer0);    // TODO: Data vs presentation: Need to appendChild inside <ul> answerContainer </ul>?
+
+  // var answer1 = document.createElement("li");
+  // answer1.textContent = currentQuestionObj.answers[1];
+  // console.log(answer1);
+  // // Give it the text of the [1] answer
+  // ul.body.appendChild(answer1);     // TODO: Data vs presentation: Need to appendChild inside <ul> answerContainer </ul>?
   
-  // Create <h2> tag, give it the text of the question
-  // Create <ul> tag
-  // Create <li> tag for each answer, give it the text of the answers
-  // Add all this stuff to the DOM
+  // var answer2 = document.createElement("li");
+  // answer2.textContent = currentQuestionObj.answers[2];
+  // console.log(answer2);
+  // // Give it the text of the [2] answer
+  // ul.body.appendChild(answer2);
+  
+  // var answer3 = document.createElement("li");
+  // answer3.textContent = currentQuestionObj.answers[3];
+  // console.log(answer3);
+  // // Give it the text of the [3] answer;
+  // ul.body.appendChild(answer3);     // TODO: Data vs presentation: Need to appendChild inside <ul> answerContainer </ul>?
+  
 }
+displayQuestion();
+
+// When User click start button,
+    // Countdown timer begins ( startTimer() called with startQuiz() event listener )
+    // Question is displayed ( displayQuestion() )
+    // Every time a question is answered, updated questionIndex by 1 to reveal new question
 
 
-// TODO: startQuiz function (which included startTimer)
+// TODO: startQuiz function (which includes startTimer)
 // TODO: startTimer function (called with startQuiz)
 // TODO: Event listener for start button / startQuiz function
 // TODO: correctAnswer function: adds point to score counter
