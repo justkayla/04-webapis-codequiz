@@ -4,54 +4,44 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kayla's Code Quiz</title>
+    <title>Challenge Quiz</title>
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 
 <body>          
         <header>
-            <div class="large-font title">Kayla's Coding Quiz</div>
+            <div class="title">Kayla's Coding Quiz</div>
+            <p>Let's test your coding knowledge with a short quiz.<br><br>
+                There are five questions and you will have 120 seconds to answer all of the questions.<br><br>If you get a question right, a point will be added to your score!<br><br>If you get a question wrong, a point will be deducted from your score and 10 seconds will be deducted from the timer.
+                <br><br>Good luck!</p>
             <button class="start-button">Start quiz</button>                       
         </header>   
         
-        <main>
+        <section>
+            <div class="card questions">
+                <div class ="questions"></div>        
+            </div>
+        </section>
 
-            <section>
-                <div class="card questions">
-                    <div class ="questions">    
-                        <h2><span>Question</span></h2>
-                            <ul>
-                                <li class="option"><span>1</span></li>
-                                <li class="option"><span>2</span></li>
-                                <li class="option"><span>3</span></li>
-                                <li class="option"><span>4</span></li>
-                            </ul>
+        <section>
+            <div class="card results">
+                <div class ="correct-incorrect-container">
+                    <div>
+                        <h2>Correct answers: <span class="correct">0 </span></h2><br>
+                        <h2>Incorrect answers: <span class="incorrect">0 </span></h2><br>
+                    </div>
+                <button class="reset-button">Reset score</button>
+                </div>
+                <div class="card timer">
+                    <div class = "large-font timer-text">
+                    <div class = "countdown-timer">120</div>
+                    <h3>seconds remaining</h3>
                     </div>
                 </div>
-            </section>
-
-            <section>
-                <div class="card results">
-                    <div class ="correct-incorrect-container">
-                        <div>
-                            <h2>Correct answers: <span class="correct">0 </span></h2>
-                            <h2>Incorrect answers: <span class="incorrect">0 </span></h2>
-                        </div>
-                    <button class="reset-button">Reset score</button>
-                    </div>
-                    <div class="card timer">
-                        <div class = "large-font timer-text">
-                        <div class = "countdown-timer">120</div>
-                        <h3>seconds remaining</h3>
-                        </div>
-                    </div>
-
-                </div>
-            
-        </main>
-
-        
+            </div> 
+        </section>         
+                
     <script src="./assets/js/script.js"></script>
 </body>
 </html>

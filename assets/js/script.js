@@ -7,154 +7,207 @@ var options = document.querySelector(".option");
 var correctAnswer = document.querySelector(".correct");
 var incorrectAnswer = document.querySelector(".incorrect");
 
-
-// Global Variables
-var correctCounter = 0;
-var incorrectCounter = 0;
-var answeredQuestion = false;
-var timer;
-var secondsRemaining = 120;
-var currentQuestion = []; // TODO: Push randomly generated question from object array into currectQuestion array for display purposes?
-// var for current index value as we move through the questions? 
+// Global variables
 
 
-// Array for all question objects
-var questions = [
-  { // Index 0
-    question: "How is Barry so cute?",
-    option: [ "1", "2", "3", "4" ],
-    correctAnswer: "1"    // TODO: How to identify correct answer?  
-  },
-
-  { // Index 1
-    question: "Why is Barry so amazing?",
-    option: [ "1", "2", "3", "4" ],
-    correctAnswer: "3"      // TODO: How to identify correct answer?    
-  },
-
-]
-
-
-// init() is called when the page loads, retrieves stored scores
-function init() {
-  getCorrects();
-  getIncorrects();
-}
-
-
-// startQuiz() is called when the start button is clicked
-function startQuiz() {  
-  answeredQuestion = false;
-  secondsRemaining = 120
-  
-  displayQuestion();    // TODO: Need question to display
-  startTimer();   // TODO: Need timer to start
-}
-
-
-// answerQuestionCorrect() is called when a question is answered correctly
-function answerQuestionCorrect() {
-  // Add point to correct counter
-  correctCounter++
-  // Disable start button during game
-  startButton.disabled = true;
-  // show next question?
-  setCorrects()
-}
-
-
-// answerQuestionIncorrect() is called when a question is answered incorrectly
-function answerQuestionIncorrect() {
-  // Add point to incorrect counter
-  incorrectCounter++
-  // Disable start button during game
-  startButton.disabled = true;
-  // stay on incorrect question?
-  setIncorrects()
-}
-
-
-// startTimer() starts and stops the timer and triggers finishQuiz()
-function startTimer() {
-  // Sets timer
-  timer = setInterval(function() {
-      secondsRemaining-- ;
-      // Tests if time has run out
-      if(secondsRemaining === 0 || secondsRemaining < 0) {
-          // Clears interval
-          clearInterval(timer);
-          secondsRemaining = 0;
-      }
-      timer.textContent = secondsRemaining;
-  }, 1000);
-}
-
-
-// Displays question
-function displayQuestion() {
-  // TODO: Randomly picks question from object array
-  randomQuestion = questions[Math.floor(Math.random() * questions.length)];
-  currentQuestion = []  
-  // Loop to push question into currentQuestion array
-  for(var i = 0; i < questions.length; i++) {
-    currentQuestion.push(questions);
-  }
-
-}
-
-
-// Updates correct answer count on screen and stores count
-function setCorrects() {
-  correctAnswer.textContent = correctCounter;
-  localStorage.setItem("correctCount", correctCounter);
-}
-
-// Updates incorrect answer count on screen and stores count
-function setIncorrects() {
-  incorrectAnswer.textContent = incorrectCounter;
-  localStorage.setItem("incorrectCount", incorrectCounter);
-}
-
-// Functions used by init()
-function getCorrects() {
-  // Get stored value from storage, if it exists
-  var storedCorrects = localStorage.getItem("correctCount");
-  // If stored value doesn't exist, set counter to 0
-  if (storedCorrects === null) {
-    correctCounter = 0;
-  } else {
-    // If a value is retrieved from client storage set correctCounter accordingly
-    correctCounter = storedCorrects;
-  }
-  correctAnswer.textContent = correctCounter;
-}
-
-function getIncorrects() {
-  var storedIncorrects = localStorage.getItem("incorrectCount");
-  if (storedIncorrects === null) {
-    incorrectCounter = 0;
-  } else {
-    incorrectCounter = storedIncorrects;
-  }
-  incorrectAnswer.textContent = incorrectCounter;
-}
 
 // Event listeners
-  // Start button
-startButton.addEventListener("click", startQuiz);
-// TODO: Why doesn't quiz start?
+startButton.addEventListener("click", function() {
 
-// Call init() when page is opened
-init();
+})
 
-// Reset button
-function resetQuiz() {
-  // Reset counters
-  correctCounter = 0;
-  incorrectCounter = 0;
-  // Renders correct/incorrect counts and sets to storage
-  setCorrects()
-  setIncorrects()
-}
-//Event listener
-resetButton.addEventListener("click", resetQuiz);
+
+
+
+
+/*
+// DOM selectors
+
+// Global variables
+
+// Array of question objects
+
+// When page first loads (init()), user is presented with landing screen
+    // Title of quiz
+    // Instructions
+    // Start Button
+
+// When user clicks the start button,
+    // Correct answer counter (top of page)
+    // Incorrect answer counter (top of page)
+    // Timer (top of page)
+    // A question is displayed
+    // The timer starts
+
+// When user chooses an answer,
+    // If answer is correct, a point is added to correctCounter
+    // If answer is false, a point is added to incorrectCounter
+    // If answer is false, 10 seconds are deducted from the timer
+    // Score === correctCounter
+
+
+
+
+    // DOM Selectors
+    var startButton = document.querySelector(".start-button");
+    var resetButton = document.querySelector(".reset-button");
+    var timer = document.querySelector(".countdown-timer");
+    var questions = document.querySelector(".questions");
+    var options = document.querySelector(".option");
+    var correctAnswer = document.querySelector(".correct");
+    var incorrectAnswer = document.querySelector(".incorrect");
+    
+    
+    // Global Variables
+    var correctCounter = 0;
+    var incorrectCounter = 0;
+    var answeredQuestion = false;
+    var timer;
+    var secondsRemaining = 120;
+    var currentQuestion = []; // TODO: Push randomly generated question from object array into currectQuestion array for display purposes?
+    // var for current index value as we move through the questions? 
+    
+    
+    // Array for all question objects
+    var questions = [
+      { // Index 0
+        question: "How is Barry so cute?",
+        option: [ "1", "2", "3", "4" ],
+        correctAnswer: "1"    // TODO: How to identify correct answer?  
+      },
+    
+      { // Index 1
+        question: "Why is Barry so amazing?",
+        option: [ "1", "2", "3", "4" ],
+        correctAnswer: "3"      // TODO: How to identify correct answer?    
+      },
+    
+    ]
+    
+    
+    // init() is called when the page loads, retrieves stored scores
+    function init() {
+      getCorrects();
+      getIncorrects();
+    }
+    
+    
+    // startQuiz() is called when the start button is clicked
+    function startQuiz() {  
+      answeredQuestion = false;
+      secondsRemaining = 120
+      
+      displayQuestion();    // TODO: Need question to display
+      startTimer();   // TODO: Need timer to start
+    }
+    
+    
+    // answerQuestionCorrect() is called when a question is answered correctly
+    function answerQuestionCorrect() {
+      // Add point to correct counter
+      correctCounter++
+      // Disable start button during game
+      startButton.disabled = true;
+      // show next question?
+      setCorrects()
+    }
+    
+    
+    // answerQuestionIncorrect() is called when a question is answered incorrectly
+    function answerQuestionIncorrect() {
+      // Add point to incorrect counter
+      incorrectCounter++
+      // Disable start button during game
+      startButton.disabled = true;
+      // stay on incorrect question?
+      setIncorrects()
+    }
+    
+    
+    // startTimer() starts and stops the timer and triggers finishQuiz()
+    function startTimer() {
+      // Sets timer
+      timer = setInterval(function() {
+          secondsRemaining-- ;
+          // Tests if time has run out
+          if(secondsRemaining === 0 || secondsRemaining < 0) {
+              // Clears interval
+              clearInterval(timer);
+              secondsRemaining = 0;
+          }
+          timer.textContent = secondsRemaining;
+      }, 1000);
+    }
+    
+    
+    // Displays question
+    function displayQuestion() {
+      // TODO: Randomly picks question from object array
+      randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+      currentQuestion = []  
+      // Loop to push question into currentQuestion array
+      for(var i = 0; i < questions.length; i++) {
+        currentQuestion.push(questions);
+      }
+    
+    }
+    
+    
+    // Updates correct answer count on screen and stores count
+    function setCorrects() {
+      correctAnswer.textContent = correctCounter;
+      localStorage.setItem("correctCount", correctCounter);
+    }
+    
+    // Updates incorrect answer count on screen and stores count
+    function setIncorrects() {
+      incorrectAnswer.textContent = incorrectCounter;
+      localStorage.setItem("incorrectCount", incorrectCounter);
+    }
+    
+    // Functions used by init()
+    function getCorrects() {
+      // Get stored value from storage, if it exists
+      var storedCorrects = localStorage.getItem("correctCount");
+      // If stored value doesn't exist, set counter to 0
+      if (storedCorrects === null) {
+        correctCounter = 0;
+      } else {
+        // If a value is retrieved from client storage set correctCounter accordingly
+        correctCounter = storedCorrects;
+      }
+      correctAnswer.textContent = correctCounter;
+    }
+    
+    function getIncorrects() {
+      var storedIncorrects = localStorage.getItem("incorrectCount");
+      if (storedIncorrects === null) {
+        incorrectCounter = 0;
+      } else {
+        incorrectCounter = storedIncorrects;
+      }
+      incorrectAnswer.textContent = incorrectCounter;
+    }
+    
+    // Event listeners
+      // Start button
+    startButton.addEventListener("click", startQuiz);
+    // TODO: Why doesn't quiz start?
+    
+    // Call init() when page is opened
+    init();
+    
+    // Reset button
+    function resetQuiz() {
+      // Reset counters
+      correctCounter = 0;
+      incorrectCounter = 0;
+      // Renders correct/incorrect counts and sets to storage
+      setCorrects()
+      setIncorrects()
+    }
+    //Event listener
+    resetButton.addEventListener("click", resetQuiz);
+*/
+
+
