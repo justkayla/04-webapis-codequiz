@@ -11,26 +11,25 @@
 
 <body>          
     
-    <!-- <header>
+     <header>
         <h1>Kayla's Coding Quiz</h1>
-        <p>Instructions</p>
-        <button id="start-button">Start quiz</button>
+        <p>There are 5 multiple-choice questions in the quiz. You'll have 120 seconds to answer the questions. You can only select one answer per question. A correct answer adds +1 to your score. An incorrect answer subtracts -10 seconds from the timer.<br><br>Press the start button when you're ready to begin!</p>
+        <button id="start-button">Start quiz</button><br><br>
+        <h3>Seconds remaining: <div id="countdown-timer">120</div></h3><br>
+        <h2 id="current-score">Score: </h2>
+        <!-- <h2 id="#points-counter">Total points: </h2> Need to fix in js-->
     </header>
 
-    <section class="card">
-        <h2 id="#questions">Question: </h2>        
-        <ul id="#answers">
-            <li id="answer0"></li>
-            <li id="answer1"></li>
-            <li id="answer2"></li>
-            <li id="answer3"></li>
-        </ul>       
+    <section class="question-container"></section>      
+    
+    <section class="initials-container">
+        <input class="initials-input"></input>
+        <button class="initials-submit">Submit initials: </button>        
+    </section>   
+    
+    <section>
+        <ul id="display-scores"></ul>      
     </section>
-
-    <footer>
-        <h3>Seconds remaining: <div id="countdown-timer">120</div></h3>        
-        <h2 id="currentScore">Score: </h2>      
-    </footer> -->
         
     <script src="./assets/js/script.js"></script>
 </body>
