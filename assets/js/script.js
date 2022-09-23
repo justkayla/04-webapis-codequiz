@@ -130,10 +130,11 @@ function logScore(){
     // How to display recalled string on screen,
       // Button to reveal stored scores?
       // Separate <section> to populate stored scores separately?
+/* 
 function displayScore(){
   // Get stored value from local storage, if it exists
   var totalPointsCounter = document.querySelector("#points-counter");
-  scores = localStorage.setItem("scores");
+  scores = localStorage.setItem("scores", JSON.stringify(scores));
   // If stored value doesn't exist, set counter to 0
   if (scores === null ) {
     totalPointsCounter = 0;
@@ -144,6 +145,7 @@ function displayScore(){
   // Render win count to page
   totalPointsCounter.textContent = scores;
 }
+*/
 
 // Create timer that counts down from 120 seconds
 function startTimer() {

@@ -36,4 +36,4 @@ THEN I can save my initials and my score
 
 Below is the finished product of my code refactor assignment.
 
-<!-- ADD SCREENSHOT -->
+![](screenshot.png)
